@@ -79,4 +79,16 @@
 (global-set-key (kbd "C-z") 'undo)           ;; Ctrl + Z pour annuler
 
 ;; Activer la sauvegarde automatique à chaque modification
-(auto-save-mode t) 
+(auto-save-mode t)
+
+;; Utiliser une barre verticale en mode insertion
+(setq-default cursor-type '(bar . 2)) ;; Barre verticale
+
+;; Modifier le curseur pour le mode normal
+(add-hook 'evil-normal-state-entry-hook
+          (lambda () (setq cursor-type 'box))) ;; Rectangle clignotant
+
+;; Modifier le curseur pour le mode insertion
+(add-hook 'evil-insert-state-entry-hook
+          (lambda () (setq cursor-type '(bar . 2)))) ;; Barre verticale
+	
