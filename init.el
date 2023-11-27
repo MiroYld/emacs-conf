@@ -72,3 +72,11 @@
 ;; Charger Lsp-mode
 (require 'lsp-mode)
 (add-hook 'prog-mode-hook #'lsp)
+
+;; Utiliser des raccourcis clavier classiques pour copier, couper, coller et annuler
+(global-set-key (kbd "C-c") 'kill-ring-save) ;; Ctrl + C pour copier
+(global-set-key (kbd "C-v") 'yank)           ;; Ctrl + V pour coller
+(global-set-key (kbd "C-z") 'undo)           ;; Ctrl + Z pour annuler
+
+;; Activer la sauvegarde automatique à chaque modification
+(auto-save-mode t) 
