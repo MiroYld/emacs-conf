@@ -8,9 +8,10 @@
 
 (setq auto-save-default nil
       create-lockfiles nil
-      company-idle-delay 0.0
+      company-idle-delay 0.1
       company-minimum-prefix-length 1
-      lsp-idle-delay 0.1
+      lsp-idle-delay 0.2
+      c-set-style "ellemtel"
       inhibit-splash-screen t
       inhibit-startup-message t
       history-length 20
@@ -45,6 +46,6 @@
 (yas-global-mode 1)
 (solaire-global-mode +1)
 
-;; conf lsp
+;; conf c/cpp
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
