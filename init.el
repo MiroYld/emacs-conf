@@ -13,6 +13,7 @@
       lsp-idle-delay 0.1
       inhibit-splash-screen t
       inhibit-startup-message t
+      history-length 20
       vc-follow-symlinks t
       make-backup-files nil
       lsp-prefer-capf t
