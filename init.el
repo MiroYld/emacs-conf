@@ -45,7 +45,7 @@
 (savehist-mode)
 (nyan-mode 1)
 (yas-global-mode 1)
-(solaire-global-mode +1)
+(solaire-global-mode)
 (global-display-line-numbers-mode)
 (smartparens-global-mode t)
 (toggle-frame-fullscreen)
