@@ -1,4 +1,4 @@
-;; Démarrer Emacs en plein écran
+;; Démarrer Emacs en plein écran  -*- lexical-binding: t; -*-
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
 ;; Masquer la barre de menu, la barre d'outils et la scroll bar
@@ -13,6 +13,7 @@
       lsp-idle-delay 0.2
       c-set-style "ellemtel"
       inhibit-splash-screen t
+      magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
       inhibit-startup-message t
       history-length 20
       vc-follow-symlinks t
@@ -20,23 +21,25 @@
       lsp-prefer-capf t
       ccls-executable "/usr/bin/ccls"
       company-idle-delay 0
-      custom-file "~/.emacs.d/my-custom.el")
+      custom-file "~/.emacs.d/my-custom.el"
+      ivy-use-virtual-buffers t
+      ivy-count-format "(%d/%d) "
+      )
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (with-eval-after-load 'elisp-mode
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
 
-(with-eval-after-load 'ivy 
-  (setq ivy-use-virtual-buffers t
-        ivy-re-builders-alist '((swiper . ivy--regex-plus)
-                                (t . ivy--regex-fuzzy))
-        ivy-virtual-abbreviate 'full
-        counsel-find-file-ignore-regexp "\\.go\\'"
-        enable-recursive-minibuffers t
-        recentf-max-saved-items nil))
-
+ (with-eval-after-load 'ivy 				      		 
+   (setq ivy-use-virtual-buffers t			      		 
+         ivy-re-builders-alist '((swiper . ivy--regex-plus) 		 
+                                 (t . ivy--regex-fuzzy))    		 
+         ivy-virtual-abbreviate 'full			   		 
+         counsel-find-file-ignore-regexp "\\.go\\'"	   		 
+         enable-recursive-minibuffers t		      		 
+         recentf-max-saved-items nil))		      		 
 ;; Charger le thème Doom
-(load-theme 'doom-dracula t)
+;;(load-theme 'doom-dracula t)
 
 (ivy-mode 1)
 (counsel-mode)
@@ -45,6 +48,8 @@
 (nyan-mode 1)
 (yas-global-mode 1)
 (solaire-global-mode +1)
+(global-display-line-numbers-mode)
+(smartparens-global-mode t)
 
 ;; conf c/cpp
 (add-hook 'c-mode-hook 'lsp)

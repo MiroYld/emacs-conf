@@ -1,6 +1,7 @@
 (specifications->manifest
  (list "emacs"
        "emacs-auto-complete"
+       "emacs-bash-completion"
        "emacs-ccls"
        "emacs-company-lsp"
        "emacs-counsel"
@@ -28,5 +29,6 @@
        "emacs-vertico-posframe"
        "emacs-which-key"
        "emacs-yasnippet"
+       "emacs-yaml-mode"
        "emacs-yasnippet-snippets"))
 
