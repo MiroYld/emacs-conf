@@ -1,6 +1,3 @@
-;; Démarrer Emacs en plein écran  -*- lexical-binding: t; -*-
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
-
 ;; Masquer la barre de menu, la barre d'outils et la scroll bar
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
@@ -15,6 +12,7 @@
       inhibit-splash-screen t
       magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1
       inhibit-startup-message t
+      nyan-animate-nyancat t
       history-length 20
       vc-follow-symlinks t
       make-backup-files nil
@@ -38,8 +36,8 @@
          counsel-find-file-ignore-regexp "\\.go\\'"	   		 
          enable-recursive-minibuffers t		      		 
          recentf-max-saved-items nil))		      		 
-;; Charger le thème Doom
-;;(load-theme 'doom-dracula t)
+
+(load-theme 'doom-acario-light t)
 
 (ivy-mode 1)
 (counsel-mode)
@@ -50,7 +48,7 @@
 (solaire-global-mode +1)
 (global-display-line-numbers-mode)
 (smartparens-global-mode t)
+(toggle-frame-fullscreen)
 
-;; conf c/cpp
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)

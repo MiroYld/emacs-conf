@@ -12,7 +12,6 @@
        "emacs-doom-themes"
        "emacs-dtrt-indent"
        "emacs-evil"
-       "emacs-hl-todo"
        "emacs-irony-mode"
        "emacs-ivy"
        "emacs-ivy-yasnippet"
