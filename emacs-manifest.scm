@@ -1,11 +1,13 @@
 (specifications->manifest
  (list "emacs"
+       "emacs-ansible-doc"
        "emacs-auto-complete"
        "emacs-bash-completion"
+       "emacs-cc-mode"
        "emacs-ccls"
        "emacs-company-lsp"
        "emacs-counsel"
-       "emacs-cc-mode"
+       "emacs-dmenu"
        "emacs-docker-compose-mode"
        "emacs-dockerfile-mode"
        "emacs-doom-modeline"
@@ -25,13 +27,16 @@
        "emacs-perspective"
        "emacs-projectile"
        "emacs-rg"
-       "emacs-smex"
        "emacs-smartparens"
+       "emacs-smex"
        "emacs-terraform-mode"
        "emacs-vertico"
        "emacs-vertico-posframe"
+       "emacs-vterm"
        "emacs-which-key"
-       "emacs-yasnippet"
        "emacs-yaml-mode"
-       "emacs-yasnippet-snippets"))
+       "emacs-yasnippet"
+       "emacs-yasnippet-snippets"
+       "polybar"))
+
 
