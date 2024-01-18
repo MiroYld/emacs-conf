@@ -4,6 +4,22 @@
 (tool-bar-mode -1)
 (exwm-enable)
 
+(defvar efs/polybar-process nil
+  "Holds the process of the running Polybar instance, if any")
+
+(defun efs/kill-panel ()
+  (interactive)
+  (when efs/polybar-process
+    (ignore-errors
+      (kill-process efs/polybar-process)))
+  (setq efs/polybar-process nil))
+
+(defun efs/start-panel ()
+  (interactive)
+  (efs/kill-panel)
+  (setq efs/polybar-process (start-process-shell-command "polybar" nil "polybar panel")))
+(efs/start-panel)
+
 (setq auto-save-default nil
       create-lockfiles nil
       company-idle-delay 0.1
