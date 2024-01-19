@@ -7,6 +7,7 @@
        "emacs-ccls"
        "emacs-company-lsp"
        "emacs-counsel"
+       "emacs-desktop-environment"
        "emacs-dmenu"
        "emacs-docker-compose-mode"
        "emacs-dockerfile-mode"
@@ -22,11 +23,13 @@
        "emacs-lsp-mode"
        "emacs-lsp-ui"
        "emacs-magit"
+       "emacs-multi-vterm"
        "emacs-org"
        "emacs-paredit"
        "emacs-perspective"
        "emacs-projectile"
        "emacs-rg"
+       "emacs-solaire-mode"
        "emacs-smartparens"
        "emacs-smex"
        "emacs-terraform-mode"
@@ -37,6 +40,8 @@
        "emacs-yaml-mode"
        "emacs-yasnippet"
        "emacs-yasnippet-snippets"
-       "polybar"))
+       "lxsession"
+       "polybar"
+       "xbacklight"))
 
 

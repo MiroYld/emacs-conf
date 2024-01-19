@@ -1,24 +1,49 @@
-; Masquer la barre de menu, la barre d'outils et la scroll bar
+(add-hook 'exwm-init-hook (lambda () (start-process-shell-command "compton" nil "compton --backend glx --vsync opengl-swc")))
+(add-hook 'exwm-init-hook (lambda () (start-process-shell-command "pasystray" nil "pasystray")))
+
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+
+(require 'exwm)
+(require 'exwm-config)
+(require 'exwm-randr)
+
+(exwm-randr-enable)
 (exwm-enable)
+(window-divider-mode)
 
-(defvar efs/polybar-process nil
-  "Holds the process of the running Polybar instance, if any")
+(defvar efs/polybar-process nil							     	        	   	      		 
+  "Holds the process of the running Polybar instance, if any")			     	        	   	      		 
+(defun efs/kill-panel ()								     	        	   	      		 
+  (interactive)									     	        	   	      		 
+  (when efs/polybar-process								     	        	   	      		 
+    (ignore-errors									     	        	   	      		 
+      (kill-process efs/polybar-process)))						     	        	   	      		 
+  (setq efs/polybar-process nil))							     	        	   	      		 
 
-(defun efs/kill-panel ()
+(defun efs/start-panel ()								     	        	   	      		 
+  (interactive)									     	        	   	      		 
+  (efs/kill-panel)									     	        	   	      		 
+  (setq efs/polybar-process (start-process-shell-command "polybar" nil "polybar panel"))) 	        	   	      		 
+
+(efs/start-panel)										        	   	      		 
+(server-start)										        	   	      		 
+
+(defun efs/set-wallpaper ()
   (interactive)
-  (when efs/polybar-process
-    (ignore-errors
-      (kill-process efs/polybar-process)))
-  (setq efs/polybar-process nil))
+  (start-process-shell-command
+   "feh" nil  "feh --bg-scale /home/miro/Pictures/bg.jpg"))
 
-(defun efs/start-panel ()
+(start-process-shell-command "xrandr" nil "")
+(efs/set-wallpaper)
+
+(global-set-key (kbd "C-<f12>") 'suspend-computer)
+(defun suspend-computer ()
   (interactive)
-  (efs/kill-panel)
-  (setq efs/polybar-process (start-process-shell-command "polybar" nil "polybar panel")))
-(efs/start-panel)
+  (shell-command "i3lock-fancy && systemctl suspend"))
+
+(global-set-key (kbd "C-c t") 'multi-vterm)
 
 (setq auto-save-default nil
       create-lockfiles nil
@@ -37,27 +62,23 @@
       vertico-buffer-mode 1
       make-backup-files nil
       lsp-prefer-capf t
-      ccls-executable "/usr/bin/ccls")
+      ccls-executable "/usr/bin/ccls"
+      window-divider-default-right-width 1)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 (with-eval-after-load 'elisp-mode
   (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode))
 
- (with-eval-after-load 'ivy
-   (setq ivy-use-virtual-buffers t
-	 ivy-re-builders-alist '((swiper . ivy--regex-plus)
-				 (t . ivy--regex-fuzzy))
-	 ivy-virtual-abbreviate 'full
-	 counsel-find-file-ignore-regexp "\\.go\\'"
-	 enable-recursive-minibuffers t
-	 recentf-max-saved-items nil))
+(with-eval-after-load 'ivy
+  (setq ivy-use-virtual-buffers t
+	ivy-re-builders-alist '((swiper . ivy--regex-plus)
+				(t . ivy--regex-fuzzy))
+	ivy-virtual-abbreviate 'full
+	counsel-find-file-ignore-regexp "\\.go\\'"
+	enable-recursive-minibuffers t
+	recentf-max-saved-items nil))
 
-(load-theme 'doom-acario-light t)
-
-(require 'exwm)
-(require 'exwm-config)
-(setq window-divider-default-right-width 1)
-(window-divider-mode)
+(load-theme 'doom-dracula t)
 
 (defun start-nautilus ()
   (interactive)
@@ -75,6 +96,7 @@
 (exwm-input-set-key (kbd "M-<f3>") #'start-discord)
 
 (ivy-mode 1)
+(solaire-global-mode +1)
 (doom-modeline-mode 1)
 (display-battery-mode 1)
 (vertico-mode 1)
@@ -86,6 +108,11 @@
 (global-display-line-numbers-mode)
 (smartparens-global-mode t)
 (toggle-frame-fullscreen)
+
+(desktop-environment-brightness-small-increment "2%+")
+(desktop-environment-brightness-small-decrement "2%-")
+(desktop-environment-brightness-normal-increment "5%+")
+(desktop-environment-brightness-normal-decrement "5%-")
 
 (with-eval-after-load 'evil
   (setq evil-want-C-i-jump nil
