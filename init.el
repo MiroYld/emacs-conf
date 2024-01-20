@@ -13,6 +13,12 @@
 (exwm-enable)
 (window-divider-mode)
 
+(defun efs/exwm-update-title ()
+  (pcase exwm-class-name
+    ("Firefox" (exwm-workspace-rename-buffer (format "Firefox: %s" exwm-title)))))
+  (add-hook 'exwm-update-title-hook #'efs/exwm-update-title)
+
+
 (defvar efs/polybar-process nil							     	        	   	      		 
   "Holds the process of the running Polybar instance, if any")			     	        	   	      		 
 (defun efs/kill-panel ()								     	        	   	      		 
@@ -95,10 +101,10 @@
   (start-process "" nil "discord"))
 (exwm-input-set-key (kbd "M-<f3>") #'start-discord)
 
+(desktop-environment-mode)
 (ivy-mode 1)
 (solaire-global-mode +1)
 (doom-modeline-mode 1)
-(display-battery-mode 1)
 (vertico-mode 1)
 (vertico-posframe-mode 1)
 (counsel-mode)
@@ -108,11 +114,6 @@
 (global-display-line-numbers-mode)
 (smartparens-global-mode t)
 (toggle-frame-fullscreen)
-
-(desktop-environment-brightness-small-increment "2%+")
-(desktop-environment-brightness-small-decrement "2%-")
-(desktop-environment-brightness-normal-increment "5%+")
-(desktop-environment-brightness-normal-decrement "5%-")
 
 (with-eval-after-load 'evil
   (setq evil-want-C-i-jump nil
