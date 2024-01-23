@@ -27,16 +27,14 @@ VPN_PATTERN='(wireguard|vpn)'
 function initialization() {
     source "$DIR/rofi/rofi-network-manager.conf"
     { [[ -f "$DIR/rofi/rofi-network-manager.rasi" ]] && RASI_DIR="$DIR/rofi/rofi-network-manager.rasi"; } || { [[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/rofi/rofi-network-manager.rasi" ]] && RASI_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/rofi/rofi-network-manager.rasi"; } || exit
-    for i in "${WIRELESS_INTERFACES[@]}";
-    do
-	WIRELESS_INTERFACES_PRODUCT+=("$(nmcli -f general.product device show "$i" | awk '{print $2}')");
+    for i in "${WIRELESS_INTERFACES[@]}"; do
+        WIRELESS_INTERFACES_PRODUCT+=("$(nmcli -f general.product device show "$i" | awk '{print $2}')")
     done
-    for i in
-	"${WIRED_INTERFACES[@]}";
-    do
-	WIRED_INTERFACES_PRODUCT+=("$(nmcli -f general.product device show "$i" | awk '{print $2}')");
+    for i in "${WIRED_INTERFACES[@]}"; do
+        WIRED_INTERFACES_PRODUCT+=("$(nmcli -f general.product device show "$i" | awk '{print $2}')")
     done
-    wireless_interface_state && ethernet_interface_state
+    wireless_interface_state
+    ethernet_interface_state
 }
 function notification() {
     [[ "$NOTIFICATIONS" == "true" && -x "$(command -v notify-send)" ]] && notify-send -r "5" -u "normal" $1 "$2"

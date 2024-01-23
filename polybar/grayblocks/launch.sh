@@ -1,7 +1,6 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Add this script to your wm startup file.
-
 DIR="$HOME/.config/polybar/grayblocks"
 
 # Terminate already running bar instances

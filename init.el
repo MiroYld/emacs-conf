@@ -39,7 +39,7 @@
 
 ;; Call a shell process to start Polybar
 ;; Replace by correct path
-(call-process "/bin/bash" "/home/miro/personal/emacs-conf/start_polybar.sh")
+(call-process "/bin/bash" "/home/miro/personal/emacs-conf/polybar/launch.sh")
 
 ;; Function to set wallpaper using feh
 (defun efs/set-wallpaper ()
