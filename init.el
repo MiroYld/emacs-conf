@@ -24,30 +24,9 @@
 (exwm-randr-enable)
 (exwm-enable)
 (window-divider-mode)
-
-(defun dw/send-polybar-hook (name number)													    
-  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" name number)))						    
-
-(defun dw/update-polybar-exwm ()														    
-  (dw/send-polybar-hook "exwm" 1))														    
-(add-hook 'exwm-workspace-switch-hook #'dw/update-polybar-exwm)										    
-
-(defvar efs/polybar-process nil														    
-  "Holds the process of the running Polybar instance, if any")			     	        	   	      		 	    
-(defun efs/kill-panel ()								     	        	   	      		 	    
-  (interactive)									     	        	   	      		 	    
-  (when efs/polybar-process								     	        	   	      		 	    
-    (ignore-errors									     	        	   	      		 	    
-      (kill-process efs/polybar-process)))						     	        	   	      		 	    
-  (setq efs/polybar-process nil))							     	        	   	      		 	    
-
-(defun efs/start-panel ()								     	        	   	      		 	    
-  (interactive)									     	        	   	      		 	    
-  (efs/kill-panel)									     	        	   	      		 	    
-  (setq efs/polybar-process (start-process-shell-command "polybar" nil "polybar panel"))) 	        	   	      		 	    
-
-(efs/start-panel)										        	   	      		 
 (server-start)										        	   	      		 
+(call-process "/bin/bash" "/home/miro/personal/emacs-conf/polybar/start_polybar.sh")
+
 
 (defun efs/set-wallpaper ()
   (interactive)
@@ -68,7 +47,6 @@
       create-lockfiles nil
       company-idle-delay 0.1
       company-minimum-prefix-length 1
-      ;doom-modeline-icon nil
       dracula-alternate-mode-line-and-minibuffer t
       lsp-idle-delay 0.2
       c-set-style "ellemtel"
