@@ -5,6 +5,18 @@
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
 
+(defvar efs/frame-transparency '(80 . 80))
+(set-frame-parameter (selected-frame) 'alpha efs/frame-transparency)
+(add-to-list 'default-frame-alist `(alpha . ,efs/frame-transparency))
+
+;; Disable line numbers for some modes
+(dolist (mode '(org-mode-hook
+                term-mode-hook
+                shell-mode-hook
+                treemacs-mode-hook
+                multi-vterm-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0))))
+
 (require 'exwm)
 (require 'exwm-config)
 (require 'exwm-randr)
@@ -13,25 +25,26 @@
 (exwm-enable)
 (window-divider-mode)
 
-(defun efs/exwm-update-title ()
-  (pcase exwm-class-name
-    ("Firefox" (exwm-workspace-rename-buffer (format "Firefox: %s" exwm-title)))))
-  (add-hook 'exwm-update-title-hook #'efs/exwm-update-title)
+(defun dw/send-polybar-hook (name number)													    
+  (start-process-shell-command "polybar-msg" nil (format "polybar-msg hook %s %s" name number)))						    
 
+(defun dw/update-polybar-exwm ()														    
+  (dw/send-polybar-hook "exwm" 1))														    
+(add-hook 'exwm-workspace-switch-hook #'dw/update-polybar-exwm)										    
 
-(defvar efs/polybar-process nil							     	        	   	      		 
-  "Holds the process of the running Polybar instance, if any")			     	        	   	      		 
-(defun efs/kill-panel ()								     	        	   	      		 
-  (interactive)									     	        	   	      		 
-  (when efs/polybar-process								     	        	   	      		 
-    (ignore-errors									     	        	   	      		 
-      (kill-process efs/polybar-process)))						     	        	   	      		 
-  (setq efs/polybar-process nil))							     	        	   	      		 
+(defvar efs/polybar-process nil														    
+  "Holds the process of the running Polybar instance, if any")			     	        	   	      		 	    
+(defun efs/kill-panel ()								     	        	   	      		 	    
+  (interactive)									     	        	   	      		 	    
+  (when efs/polybar-process								     	        	   	      		 	    
+    (ignore-errors									     	        	   	      		 	    
+      (kill-process efs/polybar-process)))						     	        	   	      		 	    
+  (setq efs/polybar-process nil))							     	        	   	      		 	    
 
-(defun efs/start-panel ()								     	        	   	      		 
-  (interactive)									     	        	   	      		 
-  (efs/kill-panel)									     	        	   	      		 
-  (setq efs/polybar-process (start-process-shell-command "polybar" nil "polybar panel"))) 	        	   	      		 
+(defun efs/start-panel ()								     	        	   	      		 	    
+  (interactive)									     	        	   	      		 	    
+  (efs/kill-panel)									     	        	   	      		 	    
+  (setq efs/polybar-process (start-process-shell-command "polybar" nil "polybar panel"))) 	        	   	      		 	    
 
 (efs/start-panel)										        	   	      		 
 (server-start)										        	   	      		 
@@ -55,7 +68,7 @@
       create-lockfiles nil
       company-idle-delay 0.1
       company-minimum-prefix-length 1
-      doom-modeline-icon nil
+      ;doom-modeline-icon nil
       dracula-alternate-mode-line-and-minibuffer t
       lsp-idle-delay 0.2
       c-set-style "ellemtel"
@@ -99,21 +112,23 @@
 (defun start-discord ()
   (interactive)
   (start-process "" nil "discord"))
-(exwm-input-set-key (kbd "M-<f3>") #'start-discord)
 
+(exwm-input-set-key (kbd "M-<f3>") #'start-discord)
+(counsel-mode)
 (desktop-environment-mode)
-(ivy-mode 1)
-(solaire-global-mode +1)
 (doom-modeline-mode 1)
+(evil-mode)
+(global-display-line-numbers-mode)
+(ivy-mode 1)
+(savehist-mode)
+(smartparens-global-mode t)
+(solaire-global-mode +1)
+(toggle-frame-fullscreen)
 (vertico-mode 1)
 (vertico-posframe-mode 1)
-(counsel-mode)
-(evil-mode)
-(savehist-mode)
 (yas-global-mode 1)
-(global-display-line-numbers-mode)
-(smartparens-global-mode t)
-(toggle-frame-fullscreen)
+(pdf-tools-install)
+(pdf-loader-install) 
 
 (with-eval-after-load 'evil
   (setq evil-want-C-i-jump nil

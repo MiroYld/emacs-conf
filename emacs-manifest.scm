@@ -26,6 +26,7 @@
        "emacs-multi-vterm"
        "emacs-org"
        "emacs-paredit"
+       "emacs-pdf-tools"
        "emacs-perspective"
        "emacs-projectile"
        "emacs-rg"
