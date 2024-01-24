@@ -45,7 +45,7 @@
 (defun efs/set-wallpaper ()
   (interactive)
   (start-process-shell-command
-   "feh" nil  "feh --bg-scale /home/miro/personal/emacs-conf/img/background.jpg"))
+   "feh" nil  "feh --bg-scale /home/miro/personal/emacs-conf/img/backgroud.jpg"))
 
 ;; Run xrandr in a shell command process
 (start-process-shell-command "xrandr" nil "")
@@ -63,21 +63,22 @@
 (global-set-key (kbd "C-c t") 'multi-vterm)
 
 (setq auto-save-default nil                        ; Disable auto-save
-      create-lockfiles nil                         ; Disable lockfiles
+      c-set-style "ellemtel"                       ; Set C-style to "ellemtel"
+      ccls-executable "/usr/bin/ccls"              ; Set the ccls executable path
       company-idle-delay 0.1                       ; Company mode idle delay
       company-minimum-prefix-length 1              ; Company mode minimum prefix length
-      dracula-alternate-mode-line-and-minibuffer t ; Use alternate mode line and minibuffer for Dracula theme
-      lsp-idle-delay 0.2                           ; LSP mode idle delay
-      c-set-style "ellemtel"                       ; Set C-style to "ellemtel"
+      create-lockfiles nil                         ; Disable lockfiles
       display-line-numbers-type t                  ; Display line numbers
+      dracula-alternate-mode-line-and-minibuffer t ; Use alternate mode line and minibuffer for Dracula theme
+      history-length 20                            ; Set command history length
       inhibit-splash-screen t                      ; Inhibit splash screen at startup
       inhibit-startup-message t                    ; Inhibit startup message
-      history-length 20                            ; Set command history length
+      lsp-idle-delay 0.2                           ; LSP mode idle delay
+      lsp-prefer-capf t                            ; Prefer capf for LSP completion
+      magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1 ; start magit on fullscreen
+      make-backup-files nil                        ; Disable backup files
       vc-follow-symlinks t                         ; Follow symlinks in version control
       vertico-buffer-mode 1                        ; Enable vertico buffer mode
-      make-backup-files nil                        ; Disable backup files
-      lsp-prefer-capf t                            ; Prefer capf for LSP completion
-      ccls-executable "/usr/bin/ccls"              ; Set the ccls executable path
       window-divider-default-right-width 1         ; Set window divider right width
       )
 
@@ -166,3 +167,4 @@
 ;; LSP configuration for C and C++ modes
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
+
