@@ -62,24 +62,50 @@
 ;; Global keybinding to open a multi-vterm
 (global-set-key (kbd "C-c t") 'multi-vterm)
 
-(setq auto-save-default nil                        ; Disable auto-save
-      c-set-style "ellemtel"                       ; Set C-style to "ellemtel"
-      ccls-executable "/usr/bin/ccls"              ; Set the ccls executable path
-      company-idle-delay 0.1                       ; Company mode idle delay
-      company-minimum-prefix-length 1              ; Company mode minimum prefix length
-      create-lockfiles nil                         ; Disable lockfiles
-      display-line-numbers-type t                  ; Display line numbers
+;; Global keybinding to switch workspace
+(defun exwm-workspace-switch-to-next ()
+  "Switch to the next workspace. If there is no next workspace, switch to the first one."
+  (interactive)
+  (let ((next-index (1+ exwm-workspace-current-index))
+        (num-workspaces (length exwm-workspace--list)))
+    (if (> next-index (1- num-workspaces))
+        (exwm-workspace-switch 0)
+      (exwm-workspace-switch next-index))))
+(exwm-input-set-key (kbd "C-c n") 'exwm-workspace-switch-to-next)
+
+;; Global keybinding to add workspace
+(global-set-key (kbd "C-c a") 'exwm-workspace-add)
+
+;; Global keybinding to remove current workspace
+(defun exwm-workspace-delete-current ()
+  "Delete the current workspace. If the deleted workspace was the last one, will automatically switch to the last remaining workspace."
+  (interactive)
+  (let ((current-index exwm-workspace-current-index)
+        (num-workspaces (length exwm-workspace--list)))
+    (exwm-workspace-switch (- current-index 1))
+    (exwm-workspace-delete current-index)
+    (when (> current-index num-workspaces)
+      (exwm-workspace-switch (1- num-workspaces)))))
+(global-set-key (kbd "C-c d") 'exwm-workspace-delete-current)
+
+(setq auto-save-default nil		; Disable auto-save
+      c-set-style "ellemtel"		; Set C-style to "ellemtel"
+      ccls-executable "/usr/bin/ccls"	; Set the ccls executable path
+      company-idle-delay 0.1		; Company mode idle delay
+      company-minimum-prefix-length 1 ; Company mode minimum prefix length
+      create-lockfiles nil	      ; Disable lockfiles
+      display-line-numbers-type t     ; Display line numbers
       dracula-alternate-mode-line-and-minibuffer t ; Use alternate mode line and minibuffer for Dracula theme
-      history-length 20                            ; Set command history length
-      inhibit-splash-screen t                      ; Inhibit splash screen at startup
-      inhibit-startup-message t                    ; Inhibit startup message
-      lsp-idle-delay 0.2                           ; LSP mode idle delay
-      lsp-prefer-capf t                            ; Prefer capf for LSP completion
+      history-length 20		    ; Set command history length
+      inhibit-splash-screen t	    ; Inhibit splash screen at startup
+      inhibit-startup-message t	    ; Inhibit startup message
+      lsp-idle-delay 0.2	    ; LSP mode idle delay
+      lsp-prefer-capf t		    ; Prefer capf for LSP completion
       magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1 ; start magit on fullscreen
-      make-backup-files nil                        ; Disable backup files
-      vc-follow-symlinks t                         ; Follow symlinks in version control
-      vertico-buffer-mode 1                        ; Enable vertico buffer mode
-      window-divider-default-right-width 1         ; Set window divider right width
+      make-backup-files nil	  ; Disable backup files
+      vc-follow-symlinks t	  ; Follow symlinks in version control
+      vertico-buffer-mode 1	  ; Enable vertico buffer mode
+      window-divider-default-right-width 1 ; Set window divider right width
       )
 
 (defalias 'yes-or-no-p 'y-or-n-p)      ; Use 'y' and 'n' instead of 'yes' and 'no'
@@ -167,4 +193,8 @@
 ;; LSP configuration for C and C++ modes
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
+
+(custom-set-faces
+ '(vterm-color-bright-black ((t (:background "black" :foreground "gray")))))
+
 
