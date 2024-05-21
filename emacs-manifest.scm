@@ -1,5 +1,6 @@
 (specifications->manifest
  (list
+  "cppcheck"
   "emacs"
   "emacs-ansible-doc"
   "emacs-auto-complete"
@@ -15,16 +16,20 @@
   "emacs-doom-modeline"
   "emacs-doom-themes"
   "emacs-dtrt-indent"
+  "emacs-elegant-agenda-mode"
   "emacs-evil"
   "emacs-exwm"
   "emacs-gitlab-ci-mode"
   "emacs-irony-mode"
   "emacs-ivy"
   "emacs-ivy-yasnippet"
+  "emacs-json-mode"
+  "emacs-json-reformat"
   "emacs-lsp-mode"
   "emacs-lsp-ui"
   "emacs-magit"
   "emacs-multi-vterm"
+  "emacs-nyan-mode"
   "emacs-org"
   "emacs-paredit"
   "emacs-pdf-tools"
@@ -44,7 +49,6 @@
   "emacs-yasnippet-snippets"
   "lxsession"
   "polybar"
+  "python-lsp-server"
   "xbacklight"
   ))
-
-
