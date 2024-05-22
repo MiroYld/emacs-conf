@@ -5,6 +5,7 @@
   "emacs-ansible-doc"
   "emacs-auto-complete"
   "emacs-bash-completion"
+  "emacs-calfw"
   "emacs-cc-mode"
   "emacs-ccls"
   "emacs-company-lsp"
