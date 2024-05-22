@@ -62,12 +62,16 @@
 ;; Ajouter un raccourci pour ouvrir le calendrier
 (global-set-key (kbd "C-c c") 'my-open-calendar)
 
+;; Définir le chemin vers le fichier Org
+(setq org-agenda-files '("~/tasks.org"))
+
+;; Fonction pour ajouter une entrée Org-mode pour la date sélectionnée
 (defun my-add-org-entry ()
   "Ajouter une entrée Org-mode pour la date sélectionnée."
   (interactive)
   (let* ((date (cfw:cursor-to-date))
-	 (org-file (car org-agenda-files))
-	 (entry (read-string "Entrée: ")))
+         (org-file (car org-agenda-files))
+         (entry (read-string "Entrée: ")))
     (find-file org-file)
     (goto-char (point-max))
     (insert (format "\n* TODO %s\n  SCHEDULED: <%s>" entry (format-time-string "%Y-%m-%d %a" (encode-time 0 0 0 (calendar-extract-day date) (calendar-extract-month date) (calendar-extract-year date)))))
