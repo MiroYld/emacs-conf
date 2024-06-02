@@ -1,4 +1,7 @@
-## emacs exwm conf using guix manifest
+## emacs-exwm configuration
+
+> [!NOTE]
+> To use exwm, refer to the exwm-conf branch the master branch is now dedicated only to emacs configuration only
 
 ### Don't wait any longer to work with exwm
 
@@ -15,7 +18,13 @@ Make sure you have the following prerequisites installed:
    - [Polybar Installation](https://github.com/polybar/polybar?tab=readme-ov-file#installation)
 
 
-### Documentation (Work in Progress)
-🚧 The documentation is currently in progress 🚧
+### Screenshot
 
-See you soon 😄✨
+![Main](img/main.png)
+Scratch buffer
+
+![Lock Screen](img/lock-screen.png)
+Lock screen
+
+![Rofi](img/rofi.png)
+Rofi app launcher
