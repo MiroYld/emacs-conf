@@ -1,8 +1,14 @@
 ;; Start the exwm window manager and launch certain processes on initialization
 (add-hook 'exwm-init-hook
-          (lambda ()
-            (start-process-shell-command "compton" nil "compton --backend glx --vsync opengl-swc")
-            (start-process-shell-command "pasystray" nil "pasystray")))
+	  (lambda ()
+	    ;; Configure compton
+	    (start-process-shell-command "compton" nil "compton --backend glx --vsync opengl-swc")
+	    ;; Start pasystray
+	    (start-process-shell-command "pasystray" nil "pasystray")
+	    ;; Set mouse acceleration speed
+	    (start-process-shell-command "xinput-mouse" nil "xinput set-prop 'ASUE1304:00 04F3:3201 Mouse' 'libinput Accel Speed' 0.2")
+	    ;; Enable tap-to-click for touchpad
+	    (start-process-shell-command "xinput-touchpad" nil "xinput set-prop 'ASUE1304:00 04F3:3201 Touchpad' 'libinput Tapping Enabled' 1")))
 
 ;; Disable menu, scroll, and tool bars
 (menu-bar-mode -1)
@@ -16,10 +22,10 @@
 
 ;; Disable line numbers for certain modes
 (dolist (mode '(org-mode-hook
-                term-mode-hook
-                shell-mode-hook
-                treemacs-mode-hook
-                multi-vterm-mode-hook))
+		term-mode-hook
+		shell-mode-hook
+		treemacs-mode-hook
+		multi-vterm-mode-hook))
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 
 ;; Load exwm and related configurations
@@ -45,7 +51,16 @@
 (defun efs/set-wallpaper ()
   (interactive)
   (start-process-shell-command
-   "feh" nil  "feh --bg-scale /home/miro/personal/emacs-conf/img/backgroud.jpg"))
+   "feh" nil  "feh --bg-scale /home/miro/personal/emacs-conf/img/bg-light.jpg"))
+
+;; (defun my-set-gnome-input-settings ()
+;;   (message "Setting GNOME input settings...")
+;;   ;; Set mouse acceleration speed
+;;   (call-process "xinput" nil nil nil "set-prop" "ASUE1304:00 04F3:3201 Mouse" "libinput Accel Speed" "0.2")
+;;   ;; Enable tap-to-click for touchpad
+;;   (call-process "xinput" nil nil nil "set-prop" "ASUE1304:00 04F3:3201 Touchpad" "libinput Tapping Enabled" "1"))
+
+;; (add-hook 'exwm-init-hook #'my-set-gnome-input-settings)
 
 ;; Run xrandr in a shell command process
 (start-process-shell-command "xrandr" nil "")
@@ -59,8 +74,13 @@
   (interactive)
   (shell-command "i3lock-fancy && systemctl suspend"))
 
-;; Global keybinding to open a multi-vterm
-(global-set-key (kbd "C-c t") 'multi-vterm)
+;; Fonction pour ouvrir GNOME Terminal
+(defun open-gnome-terminal ()
+  "Open GNOME Terminal."
+  (interactive)
+  (start-process "gnome-terminal" nil "gnome-terminal"))
+;; Associer la fonction à Ctrl-c t
+(global-set-key (kbd "C-c t") 'open-gnome-terminal)
 
 (setq auto-save-default nil                        ; Disable auto-save
       c-set-style "ellemtel"                       ; Set C-style to "ellemtel"
@@ -100,7 +120,7 @@
 	))
 
 ;; Load dracula theme
-(load-theme 'doom-dracula t)
+(load-theme 'doom-acario-light t)
 
 ;; Function to start Nautilus file manager
 (defun start-nautilus ()
@@ -136,21 +156,28 @@
 (pdf-tools-install)                ; Install and enable pdf-tools
 (pdf-loader-install)               ; Install and enable pdf-loader
 
+;; enable solaire mode while changing buffer
+(defun solarize ()
+  "Enable solaire-mode while change buffer"
+  (unless (minibufferp)
+    (solaire-mode)))
+(add-hook 'buffer-list-update-hook #'solarize)
+
 ;; Evil configuration
 (with-eval-after-load 'evil
   (setq evil-want-C-i-jump nil             ; Disable C-i jump
-        evil-symbol-word-search t          ; Use symbol-based word search
-        evil-insert-state-modes nil        ; Disable insert state
-        evil-motion-state-modes nil        ; Disable motion state
-        evil-move-cursor-back nil          ; Disable move cursor back in insert mode
-        evil-kill-on-visual-paste nil      ; Disable killing on visual paste
-        evil-move-cursor-back t            ; Move cursor back in normal state
+	evil-symbol-word-search t          ; Use symbol-based word search
+	evil-insert-state-modes nil        ; Disable insert state
+	evil-motion-state-modes nil        ; Disable motion state
+	evil-move-cursor-back nil          ; Disable move cursor back in insert mode
+	evil-kill-on-visual-paste nil      ; Disable killing on visual paste
+	evil-move-cursor-back t            ; Move cursor back in normal state
 	)
 
   ;; Set initial state to 'normal' for certain modes
   (mapc (lambda (mode)
-          (evil-set-initial-state mode 'normal))
-        '(fundamental-mode prog-mode text-mode conf-mode diff-mode))
+	  (evil-set-initial-state mode 'normal))
+	'(fundamental-mode prog-mode text-mode conf-mode diff-mode))
 
   (fset 'evil-visual-update-x-selection 'ignore) ; Ignore visual update to X selection
 
@@ -167,4 +194,3 @@
 ;; LSP configuration for C and C++ modes
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
-
