@@ -131,13 +131,24 @@
 ;; Function to start Google Chrome
 (defun start-google ()
   (interactive)
-  (start-process "" nil "google-chrome"))
-(exwm-input-set-key (kbd "M-<f2>") #'start-google)
+  (start-process "google" "google" "google-chrome"))
 
 ;; Function to start Discord
 (defun start-discord ()
   (interactive)
-  (start-process "" nil "discord"))
+  (start-process "discord" "discord" "discord"))
+
+;; Rendre les noms de buffer plus significatifs
+(defun rename-buffer-to-class-name ()
+  "Rename the buffer to match the class name."
+  (exwm-workspace-rename-buffer exwm-class-name))
+
+(add-hook 'exwm-update-class-hook #'rename-buffer-to-class-name)
+
+;; Associer la touche M-<f2> pour démarrer Google Chrome
+(exwm-input-set-key (kbd "M-<f2>") #'start-google)
+
+;; Associer la touche M-<f3> pour démarrer Discord
 (exwm-input-set-key (kbd "M-<f3>") #'start-discord)
 
 (counsel-mode)                     ; Enable counsel mode
