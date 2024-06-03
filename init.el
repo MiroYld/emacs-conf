@@ -53,15 +53,6 @@
   (start-process-shell-command
    "feh" nil  "feh --bg-scale /home/miro/personal/emacs-conf/img/bg-light.jpg"))
 
-;; (defun my-set-gnome-input-settings ()
-;;   (message "Setting GNOME input settings...")
-;;   ;; Set mouse acceleration speed
-;;   (call-process "xinput" nil nil nil "set-prop" "ASUE1304:00 04F3:3201 Mouse" "libinput Accel Speed" "0.2")
-;;   ;; Enable tap-to-click for touchpad
-;;   (call-process "xinput" nil nil nil "set-prop" "ASUE1304:00 04F3:3201 Touchpad" "libinput Tapping Enabled" "1"))
-
-;; (add-hook 'exwm-init-hook #'my-set-gnome-input-settings)
-
 ;; Run xrandr in a shell command process
 (start-process-shell-command "xrandr" nil "")
 
@@ -78,7 +69,7 @@
 (defun open-gnome-terminal ()
   "Open GNOME Terminal."
   (interactive)
-  (start-process "gnome-terminal" nil "gnome-terminal"))
+  (start-process "gnome-terminal" nil "gnome-terminal" "--hide-menubar"))
 ;; Associer la fonction à Ctrl-c t
 (global-set-key (kbd "C-c t") 'open-gnome-terminal)
 
