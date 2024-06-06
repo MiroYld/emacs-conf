@@ -1,7 +1,13 @@
+;; Adding xmake plugin
+(load "~/.emacs.d/xmake.el")
+
 ;; Disable menu, scroll, and tool bars
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
+
+;; Set font size
+(set-face-attribute 'default nil :font "Ubuntu Mono-12" :weight 'normal)
 
 (setq auto-save-default nil		; Disable auto-save
       c-set-style "ellemtel"		; Set C-style to "ellemtel"
@@ -48,11 +54,13 @@
 	))
 
 ;; Load dracula theme
-(load-theme 'doom-dracula t)
+(load-theme 'doom-acario-light t)
 
 (require 'calfw)
 (require 'calfw-org)
 (require 'org)
+(require 'company)
+(require 'company-lua)
 
 ;; Fonction pour ouvrir le calendrier Org
 (defun my-open-calendar ()
@@ -97,6 +105,7 @@
 (pdf-tools-install)                ; Install and enable pdf-tools
 (pdf-loader-install)               ; Install and enable pdf-loader
 (display-battery-mode 1)           ; Display battery
+(global-company-mode 1)            ; Display battery
 
 ;; Evil configuration
 (with-eval-after-load 'evil
