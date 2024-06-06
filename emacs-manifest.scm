@@ -1,6 +1,5 @@
 (specifications->manifest
  (list
-  "cppcheck"
   "emacs"
   "emacs-ansible-doc"
   "emacs-auto-complete"
@@ -9,6 +8,7 @@
   "emacs-cc-mode"
   "emacs-ccls"
   "emacs-company-lsp"
+  "emacs-company-lua"
   "emacs-counsel"
   "emacs-desktop-environment"
   "emacs-dmenu"
@@ -26,6 +26,7 @@
   "emacs-ivy-yasnippet"
   "emacs-json-mode"
   "emacs-json-reformat"
+  "emacs-lsp-lua-emmy"
   "emacs-lsp-mode"
   "emacs-lsp-ui"
   "emacs-magit"
@@ -49,7 +50,5 @@
   "emacs-yasnippet"
   "emacs-yasnippet-snippets"
   "lxsession"
-  "polybar"
   "python-lsp-server"
-  "xbacklight"
   ))
