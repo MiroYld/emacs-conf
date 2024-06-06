@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=emacs
-Description=emacs window manager
-Exec=guix shell -m /home/miro/personal/emacs-conf/emacs-manifest.scm -- emacs
-Type=Application
-X-LightDM-DesktopName=exwm
-DesktopNames=exwm
