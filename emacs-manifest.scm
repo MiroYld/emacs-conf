@@ -6,7 +6,7 @@
   "emacs-bash-completion"
   "emacs-calfw"
   "emacs-cc-mode"
-  "emacs-ccls"
+  "emacs-auto-complete"
   "emacs-company-lsp"
   "emacs-company-lua"
   "emacs-counsel"
@@ -50,5 +50,4 @@
   "emacs-yasnippet"
   "emacs-yasnippet-snippets"
   "lxsession"
-  "python-lsp-server"
   ))
