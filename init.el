@@ -1,3 +1,4 @@
+;;;
 ;; Adding xmake plugin
 (load "~/.emacs.d/xmake.el")
 
@@ -22,7 +23,7 @@
       history-length 20                 ; Set command history length
       inhibit-splash-screen t           ; Inhibit splash screen at startup
       inhibit-startup-message t         ; Inhibit startup message
-      lsp-idle-delay 0.2                ; LSP mode idle delay
+      lsp-idle-delay 0.1                ; LSP mode idle delay
       lsp-prefer-capf t                 ; Prefer capf for LSP completion
       magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1 ; start magit on fullscreen
       make-backup-files nil             ; Disable backup files
@@ -68,7 +69,7 @@
 (global-set-key (kbd "C-c c") 'my-open-calendar)
 
 ;; Définir le chemin vers le fichier Org
-(setq org-agenda-files '("~/tasks.org"))
+(setq org-agenda-files '("~/.emacs.d/tasks.org"))
 
 ;; Fonction pour ajouter une entrée Org-mode pour la date sélectionnée
 (defun my-add-org-entry ()
