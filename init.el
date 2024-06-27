@@ -1,4 +1,3 @@
-;;;
 ;; Adding xmake plugin
 (load "~/.emacs.d/xmake.el")
 
@@ -34,7 +33,26 @@
       window-divider-default-right-width 1 ; Set window divider right width
       )
 
-(load-theme 'doom-acario-light t)
+;; Configure the Modus Themes' appearance
+(setq modus-themes-mode-line '(accented borderless)
+      modus-themes-bold-constructs t
+      modus-themes-italic-constructs t
+      modus-themes-fringes 'subtle
+      modus-themes-tabs-accented t
+      modus-themes-paren-match '(bold intense)
+      modus-themes-prompts '(bold intense)
+      modus-themes-completions'((t . (extrabold underline)))
+      modus-themes-org-blocks 'tinted-background
+      modus-themes-scale-headings t
+      modus-themes-region '(bg-only)
+      modus-themes-headings
+      '((1 . (rainbow overline background 1.4))
+	(2 . (rainbow background 1.3))
+	(3 . (rainbow bold 1.2))
+	(t . (semilight 1.1))))
+
+;; Load the dark theme by default
+(load-theme 'modus-vivendi t)
 
 (defalias 'yes-or-no-p 'y-or-n-p) ; Use 'y' and 'n' instead of 'yes' and 'no'
 
@@ -134,3 +152,54 @@
 ;; LSP configuration for C and C++ modes
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
+
+
+(use-package mu4e
+  :ensure nil
+  :config
+
+  ;; This is set to 't' to avoid mail syncing issues when using mbsync
+  (setq mu4e-change-filenames-when-moving t)
+
+  ;; Refresh mail using isync every 10 minutes
+  (setq mu4e-update-interval (* 1 60))
+  (setq mu4e-get-mail-command "mbsync -a")
+  (setq mu4e-maildir "~/Mail")
+
+  ;; Make sure plain text mails flow correctly for recipients
+  (setq mu4e-compose-format-flowed t)
+
+  ;; Configure the function to use for sending mail
+  (setq message-send-mail-function 'smtpmail-send-it)
+
+  (setq mu4e-contexts
+	(list
+	 ;; Work account
+	 (make-mu4e-context
+	  :name "Work"
+	  :match-func
+	  (lambda (msg)
+	    (when msg
+	      (string-prefix-p "/Gmail" (mu4e-message-field msg :maildir))))
+	  :vars '((user-mail-address . "your-email")
+		  (user-full-name    . "your-name")
+		  (smtpmail-smtp-server  . "smtp.gmail.com")
+		  (smtpmail-smtp-service . 465)
+		  (smtpmail-stream-type  . ssl)
+		  (mu4e-drafts-folder  . "/Gmail/[Gmail]/Drafts")
+		  (mu4e-sent-folder  . "/Gmail/[Gmail]/Sent Mail")
+		  (mu4e-refile-folder  . "/Gmail/[Gmail]/All Mail")
+		  (mu4e-trash-folder  . "/Gmail/[Gmail]/Trash")))))
+
+  (setq mu4e-maildir-shortcuts
+	'(("/Gmail/Inbox"             . ?i)
+	  ("/Gmail/[Gmail]/Sent Mail" . ?s)
+	  ("/Gmail/[Gmail]/Trash"     . ?t)
+	  ("/Gmail/[Gmail]/Drafts"    . ?d)
+	  ("/Gmail/[Gmail]/All Mail"  . ?a))))
+
+
+(global-set-key (kbd "C-c m") 'mu4e)
+
+(mu4e-alert-set-default-style 'libnotify)
+(add-hook 'after-init-hook #'mu4e-alert-enable-notifications)
