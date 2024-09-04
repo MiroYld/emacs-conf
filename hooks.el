@@ -4,7 +4,6 @@
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
-
 ;; Ivy configuration
 (with-eval-after-load 'ivy
   (setq ivy-use-virtual-buffers t                         ; Use virtual buffers in Ivy

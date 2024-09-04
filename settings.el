@@ -15,6 +15,7 @@
       undo-tree-enable-undo-in-region nil
       nyan-animate-nyancat t
       vc-follow-symlinks t
+      custom-file "~/.emacs.d/my-custom.el"
       vertico-buffer-mode 1
       window-divider-default-right-width 1
       savehist-file "~/.emacs.d/savehist"

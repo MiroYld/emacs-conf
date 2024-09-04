@@ -4,6 +4,7 @@
 (load "~/.emacs.d/hooks.el")
 (load "~/.emacs.d/keybindings.el")
 (load "~/.emacs.d/xmake.el")
+(load "~/.emacs.d/calendar.el")
 
 ;; Others conf
 (counsel-mode)
