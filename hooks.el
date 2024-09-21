@@ -4,8 +4,8 @@
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
 
-;; Ivy configuration
-(with-eval-after-load 'ivy
+;;Ivy configuration
+(with-eval-after-load 'ivy-rich
   (setq ivy-use-virtual-buffers t                         ; Use virtual buffers in Ivy
 	ivy-re-builders-alist '((swiper . ivy--regex-plus)
 				(t . ivy--regex-fuzzy))   ; Regex builders for Ivy
@@ -46,7 +46,7 @@
   (with-current-buffer (get-buffer-create "*Welcome*")
     (setq truncate-lines t)
     (let* ((buffer-read-only)
-	   (image-path "~/Downloads/emacs-modern.png")
+	   (image-path "~/Pictures/emacs-modern.png")
 	   (image (create-image image-path))
 	   (size (image-size image))
 	   (height (cdr size))

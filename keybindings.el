@@ -13,6 +13,7 @@
 ;; Bind the function to C-c f
 (global-set-key (kbd "C-c f") 'open-file-at-point)
 
+
 (require 'lsp-mode)
 
 (defun implement-function ()
@@ -66,3 +67,34 @@
   (define-key lsp-mode-map (kbd "C-c C-d") 'lsp-find-definition)
   (define-key lsp-mode-map (kbd "C-c C-t") 'lsp-find-type-definition)
   (define-key lsp-mode-map (kbd "C-c C-f") 'lsp-format-buffer))
+
+
+;; Keybindings EAF
+(global-set-key (kbd "C-c o") 'eaf-open)
+(defvar eaf-file-manager--show-hidden-files nil
+  "Non-nil if hidden files are shown in EAF file manager.")
+
+(defun toggle-hidden-files ()
+  "Toggle the display of hidden files in EAF file manager."
+  (interactive)
+  (setq eaf-file-manager--show-hidden-files (not eaf-file-manager--show-hidden-files))
+  (eaf-file-manager-refresh))
+
+(defun eaf-file-manager-refresh ()
+  "Refresh the EAF file manager view based on the hidden files toggle."
+  (when (bound-and-true-p eaf-file-manager)
+    (let ((files (eaf-file-manager--get-files)))
+      (eaf-file-manager--set-files
+       (if eaf-file-manager--show-hidden-files
+           files
+         (seq-filter (lambda (file)
+                       (not (string-match "^\\." (file-name-nondirectory file))))
+                     files))))))
+
+(defun open-and-toggle-hidden-files ()
+  "Open EAF file manager and toggle hidden files."
+  (interactive)
+  (eaf-open default-directory "file-manager")
+  (toggle-hidden-files))
+
+(global-set-key (kbd "C-c d") 'open-and-toggle-hidden-files)
