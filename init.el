@@ -4,13 +4,15 @@
 (load "~/.emacs.d/hooks.el")
 (load "~/.emacs.d/keybindings.el")
 (load "~/.emacs.d/xmake.el")
-(add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
 
-(require 'eaf)
-(require 'eaf-markdown-previewer)
-(require 'eaf-file-manager)
-(require 'eaf-browser)
-(require 'eaf-file-browser)
+;; (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
+
+;; (require 'eaf)
+;; (require 'eaf-browser)
+;; (require 'eaf-file-browser)
+;; (require 'eaf-file-manager)
+;; (require 'eaf-markdown-previewer)
+;; (require 'eaf-org-previewer)
 
 ;; Others conf
 (counsel-mode)

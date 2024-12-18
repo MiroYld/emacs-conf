@@ -13,6 +13,8 @@
 ;; Bind the function to C-c f
 (global-set-key (kbd "C-c f") 'open-file-at-point)
 
+;; Rebind I-search to Swiper to
+(global-set-key (kbd "C-s") 'swiper)
 
 (require 'lsp-mode)
 
@@ -86,10 +88,10 @@
     (let ((files (eaf-file-manager--get-files)))
       (eaf-file-manager--set-files
        (if eaf-file-manager--show-hidden-files
-           files
-         (seq-filter (lambda (file)
-                       (not (string-match "^\\." (file-name-nondirectory file))))
-                     files))))))
+	   files
+	 (seq-filter (lambda (file)
+		       (not (string-match "^\\." (file-name-nondirectory file))))
+		     files))))))
 
 (defun open-and-toggle-hidden-files ()
   "Open EAF file manager and toggle hidden files."

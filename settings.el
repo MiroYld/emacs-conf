@@ -24,3 +24,5 @@
       savehist-additional-variables '(kill-ring
                                       search-ring
                                       regexp-search-ring))
+(custom-set-variables
+ '(vlf-application 'dont-ask))
