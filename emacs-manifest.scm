@@ -13,6 +13,7 @@
   "emacs-counsel"
   "emacs-desktop-environment"
   "emacs-dmenu"
+  "emacs-devdocs"
   "emacs-docker-compose-mode"
   "emacs-dockerfile-mode"
   "emacs-doom-modeline"

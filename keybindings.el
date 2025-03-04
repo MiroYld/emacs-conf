@@ -100,3 +100,6 @@
   (toggle-hidden-files))
 
 (global-set-key (kbd "C-c d") 'open-and-toggle-hidden-files)
+
+;; devdocs shortcut
+(global-set-key (kbd "C-c C-d") 'devdocs-lookup)
