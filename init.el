@@ -11,7 +11,15 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
 (require 'eaf)
 (require 'eaf-markdown-previewer)
+(require 'eaf-airshare)
+(require 'eaf-markdown-previewer)
+(require 'eaf-image-viewer)
+(require 'eaf-system-monitor)
+(require 'eaf-video-player)
 (require 'eaf-pdf-viewer)
+(require 'eaf-file-sender)
+(require 'eaf-map)
+(require 'eaf-org-previewer)
 
 ;; Auto save
 (require 'auto-save)
@@ -46,4 +54,3 @@
 (pdf-loader-install)
 (display-battery-mode 1)
 (nyan-mode 1)
-
