@@ -21,6 +21,8 @@
   "emacs-dtrt-indent"
   "emacs-elegant-agenda-mode"
   "emacs-evil"
+  "emacs-git-gutter"
+  "emacs-git-gutter-fringe"
   "emacs-gitlab-ci-mode"
   "emacs-helm-mu"
   "emacs-all-the-icons"

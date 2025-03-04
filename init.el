@@ -54,3 +54,4 @@
 (pdf-loader-install)
 (display-battery-mode 1)
 (nyan-mode 1)
+(global-git-gutter-mode t)
