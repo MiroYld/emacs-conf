@@ -1,7 +1,5 @@
 (add-to-list 'load-path "~/.emacs.d/site-lisp/emacs-application-framework/")
 
-(load "~/.emacs.d/auto-save.el")
-(load "~/.emacs.d/gitlab-ci.el")
 (load "~/.emacs.d/hooks.el")
 (load "~/.emacs.d/keybindings.el")
 (load "~/.emacs.d/packages.el")
@@ -9,7 +7,6 @@
 (load "~/.emacs.d/ui.el")
 (load "~/.emacs.d/xmake.el")
 
-(require 'auto-save)
 (require 'eaf)
 (require 'eaf-airshare)
 (require 'eaf-file-sender)
@@ -23,7 +20,6 @@
 (require 'eaf-video-player)
 
 ;; Others conf
-(auto-save-enable)
 (counsel-mode)
 (desktop-environment-mode)
 (display-battery-mode 1)
