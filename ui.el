@@ -2,8 +2,7 @@
 (menu-bar-mode -1)
 (scroll-bar-mode -1)
 (tool-bar-mode -1)
-(set-face-attribute 'default nil :font "Ubuntu Mono-12" :weight 'normal)
-(load-theme 'doom-dracula t)
+(set-face-attribute 'default nil :font "Ubuntu Mono-12" :weight 'bold)
 
 (defalias 'yes-or-no-p 'y-or-n-p)
 
@@ -16,3 +15,9 @@
 (setq display-time-load-average nil
       display-time-default-load-average nil
       display-time-format "%Hh%M")
+
+(add-hook 'emacs-startup-hook
+	  (lambda ()
+	    (load-theme 'doom-dracula t)))
+
+(setq doom-modeline-icon t)

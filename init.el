@@ -30,7 +30,6 @@
 (global-git-gutter-mode t)
 (ivy-mode 1)
 (ivy-rich-mode 1)
-(nyan-mode 1)
 (pdf-loader-install)
 (pdf-tools-install)
 (savehist-mode)
