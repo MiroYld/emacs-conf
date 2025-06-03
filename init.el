@@ -18,8 +18,10 @@
 (require 'eaf-pdf-viewer)
 (require 'eaf-system-monitor)
 (require 'eaf-video-player)
+(require 'bash-completion)
 
 ;; Others conf
+(bash-completion-setup)
 (counsel-mode)
 (desktop-environment-mode)
 (display-battery-mode 1)

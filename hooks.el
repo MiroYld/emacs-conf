@@ -3,6 +3,7 @@
 (add-hook 'emacs-lisp-mode-hook 'enable-paredit-mode)
 (add-hook 'c-mode-hook 'lsp)
 (add-hook 'c++-mode-hook 'lsp)
+(add-hook 'sh-mode-hook #'lsp)
 
 ;;Ivy configuration
 (with-eval-after-load 'ivy-rich
