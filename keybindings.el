@@ -103,3 +103,16 @@
 
 ;; devdocs shortcut
 (global-set-key (kbd "C-c C-d") 'devdocs-lookup)
+
+
+(defun yank-extended-symbol-at-point ()
+  "Yank (copy) the extended symbol at point, including dashes and other chars."
+  (interactive)
+  (let ((bounds (bounds-of-thing-at-point 'symbol)))
+    (if bounds
+        (let ((text (buffer-substring-no-properties (car bounds) (cdr bounds))))
+          (kill-new text)
+          (message "Yanked: %s" text))
+      (message "No symbol at point."))))
+
+(global-set-key (kbd "C-c y") 'yank-extended-symbol-at-point)

@@ -23,6 +23,7 @@
       window-divider-default-right-width 1
       savehist-file "~/.emacs.d/savehist"
       savehist-save-minibuffer-history t
+      auto-save-default nil
       savehist-autosave-interval 60
       savehist-additional-variables '(kill-ring
 				      search-ring

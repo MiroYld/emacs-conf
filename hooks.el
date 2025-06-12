@@ -41,3 +41,20 @@
 
   ;; Normalize evil keymaps in edebug-mode
   (add-hook 'edebug-mode-hook 'evil-normalize-keymaps))
+
+
+(defun my/colorize-compilation-buffer ()
+  "Appliquer la coloration ANSI dans le buffer de compilation."
+  (ansi-color-apply-on-region compilation-filter-start (point)))
+
+(add-hook 'compilation-filter-hook #'my/colorize-compilation-buffer)
+
+;; --- 2. Raccourci pour arrêter le processus de compilation ---
+(global-set-key (kbd "C-c x") 'kill-compilation)
+
+;; --- 3. Commande personnalisée pour compiler avec affichage correct ---
+(defun my/compile-with-color (command)
+  "Lancer une commande avec couleurs ANSI dans un buffer compilation."
+  (interactive "sCommande à compiler: ")
+  (let ((compilation-environment '("TERM=xterm-256color")))
+    (compilation-start command 'compilation-mode)))

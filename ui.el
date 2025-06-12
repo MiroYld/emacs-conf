@@ -21,3 +21,13 @@
 	    (load-theme 'doom-dracula t)))
 
 (setq doom-modeline-icon t)
+
+(defun my-cfw-open-org-calendar ()
+  (interactive)
+  (setq org-agenda-files (list "~/org/todo.org"))
+  (cfw:open-org-calendar))
+
+(global-set-key (kbd "C-c c") 'my-cfw-open-org-calendar)
+
+
+; background term for terminal: #1E202B

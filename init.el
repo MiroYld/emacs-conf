@@ -7,6 +7,7 @@
 (load "~/.emacs.d/ui.el")
 (load "~/.emacs.d/xmake.el")
 
+(require 'ansi-color)
 (require 'eaf)
 (require 'eaf-airshare)
 (require 'eaf-file-sender)
